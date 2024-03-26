@@ -1,16 +1,27 @@
-from flask import render_template
-from flask import Flask
+from flask import render_template, Flask, request
+import yfinance as yf
 
 app = Flask(__name__)
 
-@app.route('/hello-render/')
-@app.route('/hello-render/<name>')
+@app.route('/hello/')
+@app.route('/hello/<name>')
 def hello(name=None):
     return render_template('hello-world.html', name=name)
+
+# @app.route('/stock/')
+# def stock():
+#     symbol = request.args.get('symbol', default="AAPL")
+#     quote = yf.Ticker(symbol)
+#     return quote.info 
+
+@app.route('/hello', methods=['POST']) 
+def stock():
+    recent_data = yf.download("AAPL", period="1d")
+    print(recent_data)
 
 @app.route("/") 
 def index(): 
     return "Main Page"
 
 if __name__ == "__main__":
-   app.run()
+   app.run(debug=True)
