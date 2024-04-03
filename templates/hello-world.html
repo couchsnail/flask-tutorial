@@ -7,45 +7,34 @@
 {% endif %}
 
   <body>
-    <h1>Click the button to open Google</h1> 
-      <button onclick="window.open(('https://google.com'))">Click me!</button> 
-    <h1>Click the button to see Apple's current stock price!</h1> 
-    <!-- <form method="POST" action="/hello">
-        <button submit="">Click me!</button>
-    </form> -->
-    <button onclick="displayInfo()">See stock info</button>
-    <div id=stock_info>{{ message }}</div>
-    
-    <script type="module">
-      // let toggle = button => {
-      //   let element = document.getElementById("stock_info");
-      //   let hidden = element.getAttribute("hidden");
+      <h1>Click the button to open Google</h1> 
+        <!-- <button onclick="window.open(('https://google.com'))">Click me!</button>  -->
+        <form id="openTabForm" action="{{url_for('open_new_tab')}}" method="post" target="_blank">
+          <button type="submit">Open Google!</button>
+        </form>
+          <!-- <button name="googlebtn" onclick={opentab()}>Click me!</button> -->
+      <h1>Click the button to see Apple's current stock price!</h1>
+        <button onclick="printInfo()">Print Apple Info</button>
+        <p id="infoParagraph"></p>
 
-      //   if (hidden) {
-      //      element.removeAttribute("hidden");
-      //   } else {
-      //      element.setAttribute("hidden", "hidden");
-      //   }
-      // }
-      function displayInfo(){
-        // let element = document.getElementById("stock_info");
-        // recent_data = yf.download("AAPL", period="1d")
-        // if (element.style.display === "none"){
-        //   element.style.display = "block";
-        //   //element.setText(recent_data);
-        // }
-        var x = document.getElementById("stock_info");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
+      <script>
+        document.getElementById('openTabForm').addEventListener('submit', function(event) {
+            // Prevent the form from submitting normally
+            event.preventDefault();
+            // Submit the form via JavaScript to open the new tab
+            this.submit();
+        });
+
+        function printInfo() {
+            fetch('/hello/print_info', {
+                method: 'POST',
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('infoParagraph').innerText = data;
+            })
+            .catch(error => console.error('Error:', error));
         }
-      }
-
-      function stockInfo(){
-        
-        x.setAttribute(Text, recent_data)
-      }
-    </script>
-  </body>
-</html>
+      </script>
+    </body>
+  </html>  
