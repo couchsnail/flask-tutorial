@@ -8,7 +8,7 @@ RUN pip install numpy
 
 WORKDIR /flask-tutorial
 COPY . .
-#EXPOSE 5000
+EXPOSE 5000
 #ENV FLASK_APP=hello-render.py
 CMD [ "flask", "--app", "hello-render.py", "run", "--host=0.0.0.0"]
 
