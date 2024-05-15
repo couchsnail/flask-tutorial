@@ -8,3 +8,5 @@ If having problems pushing to Flask:
 Login to docker.io
 Make sure file is named user/container:tag
 Then docker push user/container:tag
+
+To run DMM script: cd rucio-sense-dmm > ./etc/debug.sh
