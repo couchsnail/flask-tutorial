@@ -10,3 +10,6 @@ Make sure file is named user/container:tag
 Then docker push user/container:tag
 
 To run DMM script: cd rucio-sense-dmm > ./etc/debug.sh
+To add rules: open new terminal simultaneously with debug script > 
+python rucio.py --rule_id TEST_RULE --src_site T2_US_SDSC --dst_site T2_US_Caltech_Test --priority 5 add
+
